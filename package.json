@@ -1,0 +1,20 @@
+{
+  "name": "reservation_config",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "create-configs": "tsx ./scripts/generate-host-configs.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.17",
+    "prettier": "3.5.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}
