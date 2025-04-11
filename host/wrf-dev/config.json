@@ -1,12 +1,12 @@
 {
     "data": {
         "BRAND": "WRF",
-        "theme": "dubai",
-        "tenant": "Wrf",
-        "defaultLocale": "en_EN",
+        "theme": "wrf",
+        "tenant": "white_rabbit_family",
+        "defaultLocale": "ru_RU",
         "supportEmail": "",
         "supportPhone": "",
-        "brand_title": "Reservation Management System",
+        "brand_title": "White Rabbit Family",
         "telephonyEnabled": false,
         "depositEnabled": true,
         "clientsHasEmail": true,
