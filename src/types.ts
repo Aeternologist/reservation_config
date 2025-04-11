@@ -36,5 +36,5 @@ export type Config = {
         enableShiftIntervalForGrid?: boolean;
     };
     hostname: string;
-    version: number;
+    version: string;
 };

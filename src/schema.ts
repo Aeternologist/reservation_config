@@ -37,5 +37,5 @@ export const ConfigSchema = z.object({
         enableShiftIntervalForGrid: z.boolean(),
     }),
     hostname: z.string(),
-    version: z.number(),
+    version: z.string(),
 });

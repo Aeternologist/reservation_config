@@ -1,6 +1,11 @@
+import { ConfigSchema } from './../src/schema';
 import fs from 'fs';
 import path from 'path';
-import { ConfigSchema } from '../src/schema';
+import { fileURLToPath } from 'url';
+
+// Эмуляция __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Путь к директории, в которой лежат файлы конфигураций
 const configsDir = path.join(__dirname, '..', 'brand-config');
@@ -11,57 +16,49 @@ const hostBaseDir = path.join(__dirname, '..', 'host');
 const configFiles = fs.readdirSync(configsDir);
 
 // Перебираем каждый файл из директории
-configFiles.forEach((fileName) => {
-    // При необходимости, пропускаем файлы, которые не являются конфигурационными
-    if (fileName === 'schema.ts' || fileName === 'schema.js') {
-        return;
-    }
+const run = async () => {
+    for (const fileName of configFiles) {
 
-    // Формируем путь к файлу
-    const configFilePath = path.join(configsDir, fileName);
+        const configFilePath = path.join(configsDir, fileName);
 
-    // Динамически импортируем (или require) конфигурацию
-    // Если используется CommonJS, можно использовать require, иначе - динамический import
-    // Здесь показан вариант с require
-    const moduleContent = require(configFilePath);
+        // Динамически импортируем модуль
+        const moduleContent = await import(configFilePath);
 
-    // Предполагаем, что конфигурация экспортируется как { config }
-    const config = moduleContent.config;
-    if (!config) {
-        console.warn(
-            `Файл ${fileName} не содержит экспортированного поля config, пропускаем.`,
+        const config = moduleContent.config;
+        if (!config) {
+            console.warn(
+                `Файл ${fileName} не содержит экспортированного поля config, пропускаем.`,
+            );
+            continue;
+        }
+
+        const validationResult = ConfigSchema.safeParse(config);
+        if (!validationResult.success) {
+            console.error(
+                `Ошибка валидации в файле ${fileName}:`,
+                validationResult.error,
+            );
+            continue;
+        }
+
+        const { data, hostname: subfolder, version } = validationResult.data;
+        const jsonData = { data, version };
+
+        const destinationDir = path.join(hostBaseDir, subfolder);
+        const destinationFilePath = path.join(destinationDir, 'config.json');
+
+        if (!fs.existsSync(destinationDir)) {
+            fs.mkdirSync(destinationDir, { recursive: true });
+        }
+
+        fs.writeFileSync(
+            destinationFilePath,
+            JSON.stringify(jsonData, null, 2),
         );
-        return;
-    }
-
-    // Валидация конфигурации с помощью схемы
-    const validationResult = ConfigSchema.safeParse(config);
-    if (!validationResult.success) {
-        console.error(
-            `Ошибка валидации в файле ${fileName}:`,
-            validationResult.error,
+        console.log(
+            `Файл конфигурации для ${fileName} создан по пути: ${destinationFilePath}`,
         );
-        return;
     }
+};
 
-    // Извлекаем необходимые данные
-    const { data, hostname: subfolder, version } = validationResult.data;
-    const jsonData = { data, version };
-
-    // Формируем путь к директории для записи файла (поддиректория host соответствует subfolder)
-    const destinationDir = path.join(hostBaseDir, subfolder);
-    const destinationFilePath = path.join(destinationDir, 'config.json');
-
-    // Создаём директорию, если она не существует
-    if (!fs.existsSync(destinationDir)) {
-        fs.mkdirSync(destinationDir, { recursive: true });
-    }
-
-    // Записываем JSON в файл с форматированием
-    const jsonString = JSON.stringify(jsonData, null, 2);
-    fs.writeFileSync(destinationFilePath, jsonString);
-
-    console.log(
-        `Файл конфигурации для ${fileName} создан по пути: ${destinationFilePath}`,
-    );
-});
+run();

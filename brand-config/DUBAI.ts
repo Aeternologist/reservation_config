@@ -4,8 +4,9 @@ import type { Config } from '../src/types';
 export const config = {
     data: {
         ...DEFAULT_CONFIG,
+        BRAND: 'DUBAI',
         theme: 'dubai',
-        tenant: 'Wrf',
+        tenant: 'gaia_dubai',
         brand_title: 'Reservation Management System',
         defaultLocale: 'en_EN',
         telephonyEnabled: false,
@@ -27,5 +28,5 @@ export const config = {
         bookingWidget: true,
     },
     hostname: 'demo',
-    version: 1.0,
+    version: '1.0',
 } as const satisfies Config;
