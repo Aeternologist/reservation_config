@@ -18,7 +18,6 @@ const configFiles = fs.readdirSync(configsDir);
 // Перебираем каждый файл из директории
 const run = async () => {
     for (const fileName of configFiles) {
-
         const configFilePath = path.join(configsDir, fileName);
 
         // Динамически импортируем модуль
@@ -41,23 +40,28 @@ const run = async () => {
             continue;
         }
 
-        const { data, hostname: subfolder, version } = validationResult.data;
+        const { data, hostnames, version } = validationResult.data;
         const jsonData = { data, version };
 
-        const destinationDir = path.join(hostBaseDir, subfolder);
-        const destinationFilePath = path.join(destinationDir, 'config.json');
+        hostnames.forEach((subfolder) => {
+            const destinationDir = path.join(hostBaseDir, subfolder);
+            const destinationFilePath = path.join(
+                destinationDir,
+                'config.json',
+            );
 
-        if (!fs.existsSync(destinationDir)) {
-            fs.mkdirSync(destinationDir, { recursive: true });
-        }
+            if (!fs.existsSync(destinationDir)) {
+                fs.mkdirSync(destinationDir, { recursive: true });
+            }
 
-        fs.writeFileSync(
-            destinationFilePath,
-            JSON.stringify(jsonData, null, 2),
-        );
-        console.log(
-            `Файл конфигурации для ${fileName} создан по пути: ${destinationFilePath}`,
-        );
+            fs.writeFileSync(
+                destinationFilePath,
+                JSON.stringify(jsonData, null, 2),
+            );
+            console.log(
+                `Файл конфигурации для ${fileName} создан по пути: ${destinationFilePath}`,
+            );
+        });
     }
 };
 

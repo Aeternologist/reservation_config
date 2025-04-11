@@ -1,0 +1,19 @@
+import { DEFAULT_CONFIG } from '../src/base-config';
+import type { Config } from '../src/schema';
+
+export const config = {
+    data: {
+        ...DEFAULT_CONFIG,
+        theme: 'wrf',
+        tenant: 'wrf',
+        brand_title: 'Maison Dellos',
+        hasMultiLanguage: true,
+        sortStatusInDashboard: true,
+        newBookingDesign: true,
+        vipSign: true,
+        hasStatusFiltersInHallScheme: true,
+        enableShiftIntervalForGrid: true,
+    },
+    hostnames: ['maison-dellos'],
+    version: '1.0',
+} as const satisfies Config;

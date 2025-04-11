@@ -1,5 +1,5 @@
 import { DEFAULT_CONFIG } from '../src/base-config';
-import type { Config } from '../src/types';
+import type { Config } from '../src/schema';
 
 export const config = {
     data: {
@@ -27,6 +27,6 @@ export const config = {
         sortStatusInDashboard: false,
         bookingWidget: true,
     },
-    hostname: 'demo',
+    hostnames: ['demo', 'feature'],
     version: '1.0',
 } as const satisfies Config;

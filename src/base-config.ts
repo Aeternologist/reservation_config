@@ -1,4 +1,4 @@
-import type { Config } from './types';
+import type { Config } from './schema';
 
 export const DEFAULT_CONFIG = {
     BRAND: 'WRF',

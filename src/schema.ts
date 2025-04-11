@@ -2,10 +2,11 @@ import { z } from 'zod';
 
 export const ConfigSchema = z.object({
     data: z.object({
+        BRAND: z.string(),
         theme: z.string(),
         tenant: z.string(),
         brand_title: z.string(),
-        defaultLocale: z.string(),
+        defaultLocale: z.enum(['ru_RU', 'en_EN']),
         supportEmail: z.string(),
         supportPhone: z.string(),
         telephonyEnabled: z.boolean(),
@@ -36,6 +37,7 @@ export const ConfigSchema = z.object({
         bookingWidget: z.boolean(),
         enableShiftIntervalForGrid: z.boolean(),
     }),
-    hostname: z.string(),
+    hostnames: z.string().array(),
     version: z.string(),
 });
+export type Config = z.infer<typeof ConfigSchema>;
