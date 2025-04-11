@@ -7,5 +7,4 @@ export default {
     trailingComma: 'all',
     singleQuote: true,
     semi: true,
-    parser: 'json',
 };
