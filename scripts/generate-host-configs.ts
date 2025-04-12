@@ -35,7 +35,7 @@ const run = async () => {
         if (!validationResult.success) {
             console.error(
                 `Ошибка валидации в файле ${fileName}:`,
-                validationResult.error,
+                validationResult.error.format(),
             );
             continue;
         }

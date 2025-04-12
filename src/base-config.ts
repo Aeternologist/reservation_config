@@ -15,7 +15,7 @@ export const DEFAULT_CONFIG = {
     clientsHasLoyalty: true,
     hasVIPClients: true,
     userAutoHostessSet: false,
-    autoGuestId: NaN,
+    autoGuestId: 0,
     CI_COMMIT_SHORT_SHA: 'local-develop',
     hasRequests: true,
     hasMultiLanguage: false,
