@@ -14,6 +14,6 @@ export const config = {
         hasStatusFiltersInHallScheme: true,
         enableShiftIntervalForGrid: true,
     },
-    hostnames: ['maison-dellos'],
+    hostnames: ['maison-dellos', 'maison-dellos-demo.hostes.me'],
     version: '1.0',
 } as const satisfies Config;
