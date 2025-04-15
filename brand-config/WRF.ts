@@ -19,6 +19,6 @@ export const config = {
         dragAndDrop: true,
         grayConfirmedStatusColor: true,
     },
-    hostnames: ['wrf', 'wrf-dev', 'wrf-demo.hostes.me'],
+    hostnames: ['wrf', 'wrf-dev', 'wrf-demo'],
     version: '1.0',
 } as const satisfies Config;
