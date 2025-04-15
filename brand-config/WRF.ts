@@ -5,7 +5,7 @@ export const config = {
     data: {
         ...DEFAULT_CONFIG,
         theme: 'wrf',
-        tenant: 'Wrf',
+        tenant: 'white_rabbit_family',
         brand_title: 'White Rabbit Family',
         telephonyEnabled: false,
         defaultPhoneNumber: '+7',

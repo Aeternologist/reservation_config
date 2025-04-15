@@ -5,7 +5,7 @@ export const config = {
     data: {
         ...DEFAULT_CONFIG,
         theme: 'wrf',
-        tenant: 'wrf',
+        tenant: 'maison_dellos',
         brand_title: 'Maison Dellos',
         hasMultiLanguage: true,
         sortStatusInDashboard: true,
