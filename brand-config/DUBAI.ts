@@ -27,6 +27,6 @@ export const config = {
         sortStatusInDashboard: false,
         bookingWidget: true,
     },
-    hostnames: ['demo', 'feature', 'fn-demo'],
+    hostnames: ['demo', 'feature', 'fh-demo'],
     version: '1.0',
 } as const satisfies Config;
